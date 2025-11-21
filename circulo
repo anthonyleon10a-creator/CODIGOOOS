@@ -1,0 +1,33 @@
+from FiguraGeometrica import FiguraGeometrica
+import math
+
+class Circunferencia(FiguraGeometrica):
+    """
+    Clase Circunferencia hereda de FiguraGeometrica
+    """
+    def __init__(self, radio: float):
+        # Usamos radio como alto y como ancho
+        super().__init__(alto=radio, ancho=radio)
+        self._r = radio
+    
+    '''
+    Calcula el área de la circunferencia
+    '''
+    def area(self) -> float:
+        return math.pi * (self._r ** 2)
+    
+    '''
+    Calcula el perímetro (longitud de la circunferencia)
+    '''
+    def perimetro(self) -> float:
+        return 2 * math.pi * self._r
+    
+    def __str__(self) -> str:
+        superficie = self.area()
+        longitud = self.perimetro()
+        return (f'Circunferencia(radio={self._r}, '
+                f'area={superficie:.2f}, perimetro={longitud:.2f})')
+
+if __name__ == '__main__':
+    circulo = Circunferencia(radio=3)
+    print(circulo)
