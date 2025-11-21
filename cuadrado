@@ -1,0 +1,36 @@
+from FiguraGeometrica import FiguraGeometrica
+
+class Cuadrado(FiguraGeometrica):
+    '''
+    Clase para crear Cuadrado
+    '''
+    def __init__(self, lado: float):
+        if lado <= 0:
+            raise ValueError("El lado debe ser un valor positivo")
+        # Usamos lado como alto y como ancho
+        super().__init__(alto=lado, ancho=lado)
+        self._l = lado
+    
+    '''
+    Calcula el área del cuadrado
+    '''
+    def area(self) -> float:
+        superficie = self._l * self._l
+        return superficie
+    
+    '''
+    Calcula el perímetro del cuadrado
+    '''
+    def perimetro(self) -> float:
+        contorno = 4 * self._l
+        return contorno
+    
+    def __str__(self) -> str:
+        sup = self.area()
+        cont = self.perimetro()
+        return (f'Cuadrado(lado={self._l}, '
+                f'area={sup:.2f}, perimetro={cont:.2f})')
+
+if __name__ == '__main__':
+    figura = Cuadrado(lado=5)
+    print(figura)
