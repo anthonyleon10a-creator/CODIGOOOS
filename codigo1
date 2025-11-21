@@ -1,0 +1,72 @@
+class Persona:
+    """Clase base con atributos esenciales y validación de edad."""
+    
+    def __init__(self, nombre: str, email: str, edad: int):
+        self.nombre = nombre
+        self.email = email
+        self.edad = edad # Usamos el setter para validar
+
+    # --- Property y Setter para edad ---
+    @property
+    def edad(self):
+        """Getter para la edad."""
+        return self._edad
+
+    @edad.setter
+    def edad(self, valor: int):
+        """Setter con validación: la edad debe ser un entero positivo."""
+        if not isinstance(valor, int) or valor <= 0:
+            raise ValueError("La edad debe ser un número entero positivo.")
+        self._edad = valor
+
+    def __str__(self):
+        return f"Persona: {self.nombre}, Email: {self.email}, Edad: {self.edad}"
+
+# --- Clase Hija (Cliente) ---
+class Cliente(Persona):
+    """Clase que hereda de Persona y añade atributos específicos."""
+    
+    def __init__(self, nombre: str, email: str, edad: int, codigo_cliente: str, ingreso_mensual: float):
+        
+        # Llama al constructor de la clase padre
+        super().__init__(nombre, email, edad)
+        
+        # Atributos específicos de Cliente (con validación de ingreso)
+        self.codigo_cliente = codigo_cliente
+        self.ingreso_mensual = ingreso_mensual
+
+    # --- Property y Setter para ingreso_mensual ---
+    @property
+    def ingreso_mensual(self):
+        """Getter para el ingreso."""
+        return self._ingreso_mensual
+
+    @ingreso_mensual.setter
+    def ingreso_mensual(self, valor: float):
+        """Setter con validación: el ingreso debe ser un flotante no negativo."""
+        if not isinstance(valor, (int, float)) or valor < 0:
+            raise ValueError("El ingreso debe ser un número no negativo.")
+        self._ingreso_mensual = valor
+
+    def __str__(self):
+        # Combina la info del padre y la propia
+        return (f"CLIENTE: {self.nombre} (Cod: {self.codigo_cliente}), "
+                f"Ingreso: ${self.ingreso_mensual:.2f}, Edad: {self.edad}")
+
+# --- Bloque de Prueba para PyCharm ---
+if __name__ == "__main__":
+    print("--- Ejemplo de Cliente ---")
+    try:
+        # 1. Creación de un objeto Cliente válido
+        cliente1 = Cliente("Juan Pérez", "juan@mail.com", 30, "C001", 1500.50)
+        print(cliente1)
+
+        # 2. Uso del setter heredado para edad (válido)
+        cliente1.edad = 31
+        print(f"Edad actualizada: {cliente1.edad}")
+
+        # 3. Intentar una validación fallida (edad inválida)
+        # cliente1.edad = 0 # Descomenta para ver la excepción
+
+    except ValueError as e:
+        print(f"\n¡ERROR! Falló la validación: {e}")
