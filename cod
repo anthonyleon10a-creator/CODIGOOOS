@@ -1,0 +1,43 @@
+from Cuadrado import Cuadrado
+from rectangulo import Rectangulo
+from Circunferencia import Circunferencia
+
+if __name__ == '__main__':
+    try:
+        # Cuadrado Funcion
+        figura1 = Cuadrado(lado=5)
+        print("=== CUADRADO 1 ===")
+        print(figura1)
+        print()
+        
+        figura2 = Cuadrado(lado=8)
+        print("=== CUADRADO 2 ===")
+        print(figura2)
+        print()
+        
+        # Rectangulo Funcion
+        rect1 = Rectangulo(alto=4, ancho=6)
+        print("=== RECTÁNGULO 1 ===")
+        print(rect1)
+        print()
+        
+        rect2 = Rectangulo(alto=2, ancho=10)
+        print("=== RECTÁNGULO 2 ===")
+        print(rect2)
+        print()
+        
+        # Circunferencia Funcion
+        circulo1 = Circunferencia(radio=3)
+        print("=== CIRCUNFERENCIA 1 ===")
+        print(circulo1)
+        print()
+        
+        circulo2 = Circunferencia(radio=5)
+        print("=== CIRCUNFERENCIA 2 ===")
+        print(circulo2)
+        print()
+        
+    except ValueError as e:
+        print(f"Error de validación: {e}")
+    except Exception as error:
+        print(f"Error inesperado: {error}")
