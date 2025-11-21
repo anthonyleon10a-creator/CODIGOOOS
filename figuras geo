@@ -1,0 +1,64 @@
+class FiguraGeometrica:
+    '''
+    Esta clase representa una figura geométrica
+    '''
+
+    def __init__(self, base: float, altura: float):
+        # La asignación llama a los setters para la validación inicial
+        self.base = base
+        self.altura = altura
+
+    # --- Property y Setter para base (Validación) ---
+    @property
+    def base(self):
+        return self._base
+
+    @base.setter
+    def base(self, valor_base):
+        if not isinstance(valor_base, (int, float)) or valor_base <= 0:
+            raise ValueError("La base debe ser un número positivo (int o float).")
+        self._base = valor_base
+
+    # --- Property y Setter para altura (Validación) ---
+    @property
+    def altura(self):
+        return self._altura
+
+    @altura.setter
+    def altura(self, valor_altura):
+        if not isinstance(valor_altura, (int, float)) or valor_altura <= 0:
+            raise ValueError("La altura debe ser un número positivo (int o float).")
+        self._altura = valor_altura
+
+    '''
+    Calcula el área (usando Base * Altura)
+    '''
+    def area(self) -> float:
+        return self.base * self.altura
+
+    '''
+    Método sin implementar (puede ser usado por clases hijas)
+    '''
+    def perimetro(self):
+        pass
+
+    def __str__(self):
+        # Uso de los nuevos nombres de variables (base y altura)
+        return f'FiguraGeometrica(base={self.base}, altura={self.altura}, area={self.area()})'
+
+if __name__ == '__main__':
+    print("--- Prueba de FiguraGeometrica ---")
+    try:
+        # Ejemplo de creación válida
+        figura1 = FiguraGeometrica(base=8.5, altura=4)
+        print(figura1)
+        
+        # Uso del setter para cambiar un valor y recalcular
+        figura1.base = 12
+        print(f"Nueva base establecida. {figura1}")
+
+        # Ejemplo de intento de validación fallida (comentar para ejecutar)
+        # figura2 = FiguraGeometrica(base=-5, altura=10) 
+        
+    except ValueError as e:
+        print(f"Error de Validación: {e}")
